@@ -1,0 +1,30 @@
+{
+  "ApiResources": [
+    {
+      "Name": "api",
+      "Scopes": [
+        "api"
+      ]
+    }
+  ],
+  "Clients": [
+    {
+      "ClientId": "client1",
+      "ClientSecrets": [
+        "secret1"
+      ],
+      "AllowedScopes": [
+        "api"
+      ]
+    },
+    {
+      "ClientId": "client2",
+      "ClientSecrets": [
+        "secret2"
+      ],
+      "AllowedScopes": [
+        "api"
+      ]
+    }
+  ]
+}

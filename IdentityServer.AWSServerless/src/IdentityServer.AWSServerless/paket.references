@@ -1,0 +1,6 @@
+Microsoft.AspNetCore.App 
+Amazon.Lambda.AspNetCoreServer
+AWSSDK.S3
+AWSSDK.Extensions.NETCore.Setup
+IdentityServer4
+FSharp.Data 

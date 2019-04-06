@@ -1,0 +1,41 @@
+stages:
+  - create_bundle
+  - push_image
+  - deploy_image
+
+create_bundle:
+  stage: create_bundle
+  image: mcr.microsoft.com/dotnet/core/sdk:2.2
+  script:
+    - chmod +x ./fake.sh
+    - ./fake.sh build --target bundle
+  artifacts:
+    paths:
+      - bundle_output
+
+push_image:
+  stage: push_image
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - export DOCKER_IMAGE_TAG=$(echo "$CI_COMMIT_SHA" | cut -c 1-6)
+    - echo "$GOOGLE_AUTH_JSON" > google-auth.json
+    - docker build -t gcr.io/$GOOGLE_PROJECT_ID/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+    - docker login -u _json_key -p "$(cat google-auth.json)" https://gcr.io
+    - docker push gcr.io/$GOOGLE_PROJECT_ID/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+  dependencies:
+    - create_bundle
+
+deploy_image:
+  stage: deploy_image
+  image: google/cloud-sdk
+  script:
+    - export DOCKER_IMAGE_TAG=$(echo "$CI_COMMIT_SHA" | cut -c 1-6)
+    - echo "$GOOGLE_AUTH_JSON" > google-auth.json
+    - gcloud auth activate-service-account --key-file=google-auth.json
+    - gcloud config set project $GOOGLE_PROJECT_ID
+    - gcloud container clusters get-credentials $KUBERNETES_CLUSTER_NAME --zone $KUBERNETES_CLUSTER_ZONE
+    - kubectl set image deployments/$DEPLOYMENT_NAME $DOCKER_IMAGE_NAME=gcr.io/$GOOGLE_PROJECT_ID/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+  dependencies:
+    - push_image 
