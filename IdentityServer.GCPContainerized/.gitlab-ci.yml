@@ -3,12 +3,11 @@ stages:
   - push_image
   - deploy_image
 
-only:
-    changes:
-      - ./**/*
-
 create_bundle:
   stage: create_bundle
+  only:
+    changes:
+      - ./**/*
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
   script:
     - chmod +x ./fake.sh
