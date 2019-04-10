@@ -7,7 +7,7 @@ create_bundle:
   stage: create_bundle
   only:
     changes:
-      - ./**
+      - "**/*"
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
   script:
     - chmod +x ./fake.sh
@@ -20,7 +20,7 @@ push_image:
   stage: push_image
   only:
     changes:
-      - ./**
+      - "**/*"
   image: docker:stable
   services:
     - docker:dind
@@ -37,7 +37,7 @@ deploy_image:
   stage: deploy_image
   only:
     changes:
-      - ./**
+      - "**/*"
   image: google/cloud-sdk
   script:
     - export DOCKER_IMAGE_TAG=$(echo "$CI_COMMIT_SHA" | cut -c 1-6)
