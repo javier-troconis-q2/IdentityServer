@@ -3,6 +3,10 @@ stages:
   - push_image
   - deploy_image
 
+only:
+    changes:
+      - ./**/*
+
 create_bundle:
   stage: create_bundle
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
