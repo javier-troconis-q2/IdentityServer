@@ -10,8 +10,8 @@ create_bundle:
       - IdentityServer.GCPContainerized/**/*
   image: mcr.microsoft.com/dotnet/core/sdk:2.2
   script:
-    - chmod +x ./fake.sh
-    - ./fake.sh build --target bundle
+    - chmod +x fake.sh
+    - fake.sh build --target bundle
   artifacts:
     paths:
       - bundle_output
