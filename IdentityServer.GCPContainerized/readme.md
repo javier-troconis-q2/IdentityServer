@@ -8,7 +8,7 @@ local setup
     - ./fake.sh build
 
 running the app
-- navigate to ./src/IdentityServer.GCPContainerized
+- cd IdentityServer/src/IdentityServer.GCPContainerized
     - dotnet run
 
 once the app is running, try
