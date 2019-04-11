@@ -17,7 +17,7 @@ once the app is running, try
 - authenticate client
     - curl -d 'grant_type=client_credentials&client_id=client1&client_secret=secret1' http://localhost:8080/connect/token
 
-more info on the openid spec (implemented by https://identityserver.io/) can be found @ https://openid.net/developers/specs/
+more info on the oauth spec (implemented by https://identityserver.io/) can be found @ https://openid.net/developers/specs/
 
 kubernetes cluster setup
 - create an account @ https://cloud.google.com/
@@ -32,7 +32,8 @@ kubernetes cluster setup
 CI/CD setup
 - create an account @ https://gitlab.com/
 - create a new project for an external repo
-- create the following CI/CD environment variables
+- set "project home -> Settings -> CI/CD -> General pipelines -> Custom CI config path" to IdentityServer.GCPContainerized/.gitlab-ci.yml
+- create the following "project home -> Settings -> CI/CD -> Environment variables"
     - DEPLOYMENT_NAME
     - DOCKER_IMAGE_NAME
     - GOOGLE_AUTH_JSON (create a new service account with project owner rights and export as json)
