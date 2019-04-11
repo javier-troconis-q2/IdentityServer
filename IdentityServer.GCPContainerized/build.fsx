@@ -6,8 +6,8 @@ open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
 open Fake.Core.TargetOperators
 
-let serverPath = Path.getFullName "./src/IdentityServer.GCPContainerized"
-let bundleOutputDir = Path.getFullName "./bundle_output"
+let appPath = Path.getFullName "./src/IdentityServer.GCPContainerized"
+let bundleOutputPath = Path.getFullName "./bundle_output"
 
 let runTool cmd args workingDir =
     let args = args |> String.split ' ' |> Arguments.OfArgs
@@ -19,16 +19,16 @@ let runTool cmd args workingDir =
     |> ignore
 
 Target.create "clean" (fun _ ->
-    Shell.cleanDir bundleOutputDir
+    Shell.cleanDir bundleOutputPath
 )
 
 Target.create "build" (fun _ ->
-    runTool "dotnet" "build" serverPath
+    runTool "dotnet" "build" appPath
 )
 
 Target.create "bundle" (fun _ ->
-    let args = sprintf "publish -c Release -o %s -r linux-x64" bundleOutputDir
-    runTool "dotnet" args serverPath
+    let args = sprintf "publish -c Release -o %s -r linux-x64" bundleOutputPath
+    runTool "dotnet" args appPath
 )
 
 Target.create "all" ignore
