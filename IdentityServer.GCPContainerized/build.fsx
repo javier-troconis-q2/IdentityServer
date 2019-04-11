@@ -6,8 +6,8 @@ open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
 open Fake.Core.TargetOperators
 
-let serverPath = Path.getFullName "src/IdentityServer.GCPContainerized"
-let bundleOutputDir = Path.getFullName "bundle_output"
+let serverPath = Path.getFullName "./src/IdentityServer.GCPContainerized"
+let bundleOutputDir = Path.getFullName "./bundle_output"
 
 let runTool cmd args workingDir =
     let args = args |> String.split ' ' |> Arguments.OfArgs

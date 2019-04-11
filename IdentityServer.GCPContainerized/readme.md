@@ -32,8 +32,7 @@ kubernetes cluster setup
 CI/CD setup
 - create an account @ https://gitlab.com/
 - create a new project for an external repo
-- set "project home -> Settings -> CI/CD -> General pipelines -> Custom CI config path" to IdentityServer.GCPContainerized/.gitlab-ci.yml
-- create the following "project home -> Settings -> CI/CD -> Environment variables"
+- create the following CI/CD  Environment variables
     - DEPLOYMENT_NAME
     - DOCKER_IMAGE_NAME
     - GOOGLE_AUTH_JSON (create a new service account with project owner rights and export as json)
