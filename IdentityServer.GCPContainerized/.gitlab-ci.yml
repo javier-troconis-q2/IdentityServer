@@ -17,7 +17,7 @@ create_bundle:
     - ./fake.sh build --target bundle
   artifacts:
     paths:
-      - bundle_output
+      - ./bundle_output
 
 push_image:
   stage: push_image
