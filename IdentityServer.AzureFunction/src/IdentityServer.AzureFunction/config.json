@@ -1,12 +1,4 @@
 ﻿{
-  "Logging": {
-    "IncludeScopes": false,
-    "LogLevel": {
-      "Default": "Debug",
-      "System": "Information",
-      "Microsoft": "Information"
-    }
-  },
   "ApiResources": [
     {
       "Name": "api",
@@ -26,6 +18,6 @@
       "AllowedScopes": [ "api" ]
     }
   ],
-  "SigningCertificatePath": "./certificate.pfx",
+  "SigningCertificatePath": "certificate.pfx",
   "SigningCertificatePassword": "password"
 }
