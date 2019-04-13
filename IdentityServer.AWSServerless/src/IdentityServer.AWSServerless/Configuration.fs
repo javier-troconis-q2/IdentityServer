@@ -10,7 +10,7 @@ module Configuration =
 
     let configureEntryPoint (webHostBuilder:IWebHostBuilder) = 
         
-        let appSettings = AppSettings.getAppSettings "./appsettings.json"
+        let appSettings = AppSettings.getAppSettings "./config.json"
         
         let configureServices = new Action<IServiceCollection>(fun services ->
             services.AddIdentityServer()
